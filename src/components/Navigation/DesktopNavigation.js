@@ -7,8 +7,8 @@ const DesktopNavigation = () => {
         <nav className={classes['desktop-nav']}>
             <ul>
                 <li>
-                    <NavLink to='/new'>
-                        New
+                    <NavLink to='/now-playing'>
+                        Now Playing
                     </NavLink>
                 </li>
                 <li>
