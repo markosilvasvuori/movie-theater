@@ -12,8 +12,8 @@ const MobileNavigation = (props) => {
             <nav>
                 <ul>
                     <li onClick={closeMobileNavigation}>
-                        <NavLink to='/new'>
-                            New
+                        <NavLink to='/now-playing'>
+                            Now Playing
                         </NavLink>
                     </li>
                     <li onClick={closeMobileNavigation}>
