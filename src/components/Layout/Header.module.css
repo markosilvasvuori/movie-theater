@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #181e21;
+}
+
+.logo a {
+    text-transform: uppercase;
+    color: #f8f8f8;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-nav {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .desktop-nav {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: none;
+    }
+}

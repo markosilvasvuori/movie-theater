@@ -1,0 +1,11 @@
+.slide {
+    display: flex;
+    min-width: 130px;
+    background-color: tomato;
+    margin: 0 12px;
+    cursor: pointer;
+}
+
+.slide img {
+    width: 100%;
+}
