@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import MovieSlide from './MovieSlide';
+import MovieItem from '../Movies/MovieItem';
 import classes from './Slider.module.css';
 
-const Slider = ({ title, movies }) => {
+const Slider = ({ title, movies, categoryPage }) => {
     const slideRef = useRef();
     const [slidesPosition, setSlidesPosition] = useState(0);
 
@@ -67,13 +67,13 @@ const Slider = ({ title, movies }) => {
                 <h3 className={classes['slider-title']}>
                     {title}
                 </h3>
-                <Link to='/view-more'>View More</Link>
+                <Link to={`/${categoryPage}`}>View More</Link>
             </header>
             <button 
                 className={classes['previous-button']} 
                 onClick={moveSliderBackward}
             >
-                &lt;
+                &larr;
             </button>
             <div className={classes.slider}>
                 <ul 
@@ -82,8 +82,9 @@ const Slider = ({ title, movies }) => {
                     style={{left: `-${slidesPosition}px`}}
                 >
                     {movies.slice(0, 10).map(movie => (
-                        <MovieSlide 
+                        <MovieItem 
                             key={movie.id}
+                            movieId={movie.id}
                             title={movie.title}
                             poster={movie.poster}
                         />
@@ -94,7 +95,7 @@ const Slider = ({ title, movies }) => {
                 className={classes['next-button']} 
                 onClick={moveSliderForward}
             >
-                &gt;
+                &rarr;
             </button>
         </div>
     );
