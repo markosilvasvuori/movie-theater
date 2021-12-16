@@ -61,6 +61,7 @@ const Slideshow = ({ movies }) => {
                 {movies.slice(0, 3).map(movie => (
                     <Slide 
                         key={movie.id}
+                        movieId={movie.id}
                         title={movie.title}
                         releaseDate={movie.releaseDate}
                         rating={movie.rating}
