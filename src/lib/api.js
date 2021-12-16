@@ -17,12 +17,32 @@ export const getMovies = async (category) => {
             title: movie.title,
             poster: `${POSTER_BASE_URL}${movie.poster_path}`,
             backdrop: `${BACKDROP_BASE_URL}${movie.backdrop_path}`,
-            genres: movie.genre_ids,
             overview: movie.overview,
             releaseDate: movie.release_date,
-            rating: movie.vote_average
+            rating: movie.vote_average,
         }
     });
-    console.log('Fetching movies...');
+    
     return movies;
+};
+
+export const getMovieDetails = async (movieId) => {
+    const response = await fetch(`${URL}/${movieId}?api_key=${API_KEY}&language=en-US`);
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error('Something went wrong.');
+    }
+
+    const movieDetails = {
+        id: data.id,
+        title: data.title,
+        poster: `${POSTER_BASE_URL}${data.poster_path}`,
+        backdrop: `${BACKDROP_BASE_URL}${data.backdrop_path}`,
+        overview: data.overview,
+        releaseDate: data.releaseDate,
+        rating: data.vote_average
+    }
+    
+    return movieDetails
 };
