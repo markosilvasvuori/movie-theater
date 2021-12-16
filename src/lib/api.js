@@ -40,7 +40,7 @@ export const getMovieDetails = async (movieId) => {
         poster: `${POSTER_BASE_URL}${data.poster_path}`,
         backdrop: `${BACKDROP_BASE_URL}${data.backdrop_path}`,
         overview: data.overview,
-        releaseDate: data.releaseDate,
+        releaseDate: data.release_date,
         rating: data.vote_average
     }
     
