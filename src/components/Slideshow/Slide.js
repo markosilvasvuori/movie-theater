@@ -4,14 +4,13 @@ import classes from './Slide.module.css';
 
 const Slide = (props) => {
     return (
-        <div className={classes.slide}>
+        <div className={classes.slide} style={{ backgroundImage: `url(${props.backdropImage})` }}>
             <div className={classes.details}>
                 <h2>{props.title}</h2>
-                <p className={classes.info}>
-                    <span>Runtime </span>
-                    <span>Category</span>
+                <p className={classes.rating}>
+                    <span>{props.releaseDate} | </span>
+                    <span>&#9733; {props.rating}</span>
                 </p>
-                <p className={classes.rating}>Rating</p>
                 <div className={classes.links}>
                     <Button className={classes.button}>Get Tickets</Button>
                     <Link to='/movie'>More info</Link>
