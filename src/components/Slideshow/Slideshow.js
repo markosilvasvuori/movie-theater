@@ -3,22 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Slide from './Slide';
 import classes from './Slideshow.module.css';
 
-const DUMMY_DATA = [
-    {
-        id: 'm1',
-        title: 'Movie 1'
-    },
-    {
-        id: 'm2',
-        title: 'Movie 2'
-    },
-    {
-        id: 'm3',
-        title: 'Movie 3'
-    },
-];
-
-const Slideshow = () => {
+const Slideshow = ({ movies }) => {
     const [slidePosition, setSlidePosition] = useState(0);
     const [slideCounter, setSlideCounter] = useState(1);
     const [auto, setAuto] = useState(true);
@@ -73,10 +58,13 @@ const Slideshow = () => {
                 ref={slidesRef} 
                 style={{left: `-${slidePosition}%`}}
             >
-                {DUMMY_DATA.map(movie => (
+                {movies.slice(0, 3).map(movie => (
                     <Slide 
                         key={movie.id}
                         title={movie.title}
+                        releaseDate={movie.releaseDate}
+                        rating={movie.rating}
+                        backdropImage={movie.backdrop}
                     />
                 ))}
             </div>
@@ -84,12 +72,12 @@ const Slideshow = () => {
                 <button
                     onClick={previousSlideHandler}
                 >
-                    &lt;
+                    &larr;
                 </button>
                 <button
                     onClick={nextSlideHandler}
                 >
-                    &gt;
+                    &rarr;
                 </button>
             </div>
         </div>
