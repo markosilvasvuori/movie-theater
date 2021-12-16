@@ -1,0 +1,15 @@
+.movies h2 {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.movies ul {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1265px;
+}
+
+.movies ul li {
+    max-width: 130px;
+    margin-bottom: 25px;
+}
