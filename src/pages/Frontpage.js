@@ -1,40 +1,24 @@
-import { useState, useEffect } from 'react';
-
-import { getMovies } from '../lib/api';
+import { Fragment } from 'react';
 import Slideshow from "../components/Slideshow/Slideshow";
 import Slider from "../components/Slider/Slider";
+import UpcomingMovies from '../components/Movies/UpcomingMovies';
 
-const Frontpage = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [nowPlayingMovies, setNowPlayingMovies] = useState(null);
-    const [popularMovies, setPopularMovies] = useState(null);
-
-    useEffect(() => {
-        const fetchMovies = async () => {
-            if (!nowPlayingMovies) {
-                setNowPlayingMovies(await getMovies('now_playing'));
-            }
-            if (!popularMovies) {
-                setPopularMovies(await getMovies('popular'));
-            }
-
-            setIsLoading(false);
-        }
-
-        fetchMovies();
-    }, [nowPlayingMovies, popularMovies]);
-
-    useEffect(() => {
-        console.log(nowPlayingMovies);
-    }, [nowPlayingMovies]);
-
-
+const Frontpage = ({ nowPlayingMovies, popularMovies, upcomingMovies }) => {
     return (
-        <div className='page-wrapper'>
-            <Slideshow />
-            {!isLoading && <Slider title={'Now Playing'} movies={nowPlayingMovies} />}
-            {!isLoading && <Slider title={'Popular'} movies={popularMovies} />}
-        </div>
+        <Fragment>
+            <Slideshow movies={nowPlayingMovies} />
+            <Slider 
+                title={'Now Playing'} 
+                movies={nowPlayingMovies} 
+                categoryPage={'now-playing'} 
+            />
+            <Slider 
+                title={'Popular'} 
+                movies={popularMovies} 
+                categoryPage={'popular'} 
+            />
+            <UpcomingMovies movies={upcomingMovies} />
+        </Fragment>
     );
 }
 
