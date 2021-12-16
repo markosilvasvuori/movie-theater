@@ -1,0 +1,132 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background-color: #000;
+}
+
+.backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: .3;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 960px;
+    text-align: center;
+}
+
+.info {
+    order: 2;
+    margin-top: 25px;
+}
+
+.poster {
+    order: 1;
+    max-width: 180px;
+}
+
+.details,
+.poster {
+    z-index: 10;
+}
+
+.details h2 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.button {
+    margin-top: 25px;
+}
+
+.overview-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 50px 25px;
+    color: #222;
+    background-color: #f8f8f8;
+}
+
+.overview {
+    order: 2;
+    max-width: 90%;
+}
+
+.overview-details {
+    display: flex;
+    order: 1;
+    max-width: 90%;
+    margin-bottom: 10px;
+}
+
+.overview-details h3 {
+    display: none;
+}
+
+.separator {
+    margin: 0 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .overview-section {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 50px 0;
+    }
+    
+    .overview {
+        order: 1;
+        max-width: 40%;
+        margin-right: 60px;
+    }
+    
+    .overview-details {
+        display: block;
+        order: 2;
+        max-width: 40%;
+    }
+
+    .overview-details h3 {
+        display: block;
+    }
+
+    .separator {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .details {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .info {
+        order: 1;
+        margin-top: 0;
+        margin-right: 80px;
+    }
+
+    .poster {
+        order: 2;
+        max-width: 250px;
+    }
+}
