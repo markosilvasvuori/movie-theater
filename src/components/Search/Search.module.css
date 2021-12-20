@@ -1,0 +1,44 @@
+.search {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+}
+
+.search a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.search img {
+    width: 100%;
+    height: 100%;
+}
+
+.search .input {
+    position: absolute;
+    top: 0;
+    right: 27px;
+    width: 180px;
+    height: 25px;
+    z-index: 1000;
+}
+
+@media screen and (min-width: 400px) {
+    .search .input {
+        width: 220px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .search .input {
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 1190px) {
+    .search .input {
+        width: 300px;
+    }
+}
