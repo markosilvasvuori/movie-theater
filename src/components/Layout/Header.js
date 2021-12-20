@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import DesktopNavigation from '../Navigation/DesktopNavigation';
 import MobileNavigation from '../Navigation/MobileNavigation';
 import HamburgerIcon from '../UI/HamburgerIcon';
-import Search from '../Search';
+import Logo from '../UI/Logo';
+import Search from '../Search/Search';
 import Login from '../Login';
 import classes from './Header.module.css';
 
@@ -15,11 +15,13 @@ const Header = () => {
         setShowMobileNav(!showMobileNav);
     }
 
+    const closeMobileMenu = () => {
+        setShowMobileNav(false);
+    };
+
     return (
         <header className={classes.header}>
-            <div className={classes.logo}>
-                <Link to='/'>Movie Theater</Link>
-            </div>
+            <Logo onClick={closeMobileMenu} />
             <div className={classes['desktop-nav']}>
                 <DesktopNavigation />
             </div>
@@ -27,9 +29,9 @@ const Header = () => {
                 <Search />
                 <Login />
                 <div className={classes['mobile-nav']}>
-                    <HamburgerIcon onClick={toggleMobileMenu} />
+                    <HamburgerIcon onClick={toggleMobileMenu} onOpen={showMobileNav} />
                     {showMobileNav && 
-                        <MobileNavigation onClick={toggleMobileMenu} />
+                        <MobileNavigation onClick={closeMobileMenu} />
                     }
                 </div>
             </div>
