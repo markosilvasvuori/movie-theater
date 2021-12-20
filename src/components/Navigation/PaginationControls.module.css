@@ -1,0 +1,21 @@
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    color: #f8f8f8;
+    background-color: #222;
+    cursor: pointer;
+}
+
+.disabled {
+    color: #a09c9c;
+    opacity: .7;
+    cursor: default;
+}
