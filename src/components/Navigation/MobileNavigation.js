@@ -12,17 +12,12 @@ const MobileNavigation = (props) => {
             <nav>
                 <ul>
                     <li onClick={closeMobileNavigation}>
-                        <NavLink to='/now-playing'>
+                        <NavLink to='/now-playing/0'>
                             Now Playing
                         </NavLink>
                     </li>
                     <li onClick={closeMobileNavigation}>
-                        <NavLink to='/popular'>
-                            Popular
-                        </NavLink>
-                    </li>
-                    <li onClick={closeMobileNavigation}>
-                        <NavLink to='/upcoming'>
+                        <NavLink to='/upcoming/0'>
                             Upcoming
                         </NavLink>
                     </li>

@@ -7,17 +7,12 @@ const DesktopNavigation = () => {
         <nav className={classes['desktop-nav']}>
             <ul>
                 <li>
-                    <NavLink to='/now-playing'>
+                    <NavLink to='/now-playing/0'>
                         Now Playing
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/popular'>
-                        Popular
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to='/upcoming'>
+                    <NavLink to='/upcoming/0'>
                         Upcoming
                     </NavLink>
                 </li>
