@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* max-width: 1215px; */
     max-width: 1395px;
-    padding: 0 90px;
+    padding: 0 25px;
+    margin-bottom: 50px;
 }
 
-.upcoming-movies ul {
+.upcoming-movies .list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -15,7 +15,7 @@
     row-gap: 25px;
 }
 
-.upcoming-movies ul li {
+.upcoming-movies .list div {
     width: 100%;
     margin: 0;
 }
@@ -31,8 +31,14 @@
     color: #f8f8f8;
 }
 
+@media screen and (min-width: 768px) {
+    .upcoming-movies {
+        padding: 0 90px;
+    }
+}
+
 @media screen and (min-width: 1024px) {
-    .upcoming-movies ul {
+    .upcoming-movies .list {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
