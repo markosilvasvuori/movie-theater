@@ -4,12 +4,8 @@
     justify-content: space-between;
     width: 100%;
     padding: 20px 30px;
-    background-color: #181e21;
-}
-
-.logo a {
-    text-transform: uppercase;
-    color: #f8f8f8;
+    background-color: #111;
+    z-index: 100;
 }
 
 .desktop-nav {
@@ -24,6 +20,7 @@
 .mobile-nav {
     display: flex;
     align-items: center;
+    margin-left: 15px;
 }
 
 @media screen and (min-width: 1024px) {
