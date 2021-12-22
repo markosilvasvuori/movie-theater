@@ -3,5 +3,13 @@
     border-radius: 20px;
     border: none;
     font-weight: bold;
+    color: #f8f8f8;
+    background-color: #6d42c7;
     cursor: pointer;
 }
+
+.disabled {
+    color: #dbdbdb;
+    background-color: #777;
+    cursor: not-allowed;
+  }
