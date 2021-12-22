@@ -37,5 +37,11 @@ h3 {
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 40px;
+  padding-bottom: 325px; /* Height of footer */
+}
+
+@media screen and (min-width: 768px) {
+  .page-wrapper {
+    padding-bottom: 190px; /* Height of footer */
+  }
 }
