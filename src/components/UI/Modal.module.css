@@ -1,0 +1,52 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 700px;
+    height: 70%;
+    max-height: 400px;
+    background-color: #000;
+    border: 1px solid #222;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    z-index: 1200;
+}
+
+.modal header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 25px;
+    border-bottom: 1px solid #222;
+}
+
+.modal header h3 {
+    margin-bottom: 0;
+}
+
+.modal .close-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    color: #f8f8f8;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
