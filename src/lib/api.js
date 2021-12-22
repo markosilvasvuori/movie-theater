@@ -1,10 +1,51 @@
-const URL = 'https://api.themoviedb.org/3/movie';
+import NotFoundPoster from '../components/Movies/not-found.png';
+
+const getDate = (tomorrow) => {
+    const date = new Date();
+
+    if (tomorrow) {
+        date.setDate(date.getDate() + 1);
+    }
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    if (day.toString().length === 1) {
+        day = '0' + day;
+    }
+    if (month.toString().length === 1) {
+        month = '0' + month;
+    }
+    return `${year}-${month}-${day}`;
+};
+
+const getDateThreeMonthsAgo = () => {
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    let day = threeMonthsAgo.getDate();
+    let month = threeMonthsAgo.getMonth() + 1;
+    const year = threeMonthsAgo.getFullYear();
+
+    if (day.toString().length === 1) {
+        day = '0' + day;
+    }
+    if (month.toString().length === 1) {
+        month = '0' + month;
+    }
+    return `${year}-${month}-${day}`;
+};
+
+export const NOW_PLAYING = `primary_release_date.gte=${getDateThreeMonthsAgo()}&primary_release_date.lte=${getDate()}`;
+export const UPCOMING_MOVIES = `primary_release_date.gte=${getDate(true)}`;
 const API_KEY = '93530160840d922e585f6b81bf62a7a0';
+const URL_MOVIES = 'https://api.themoviedb.org/3/discover/movie?api_key=';
+const URL_SEARCH = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=`;
 const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_BASE_URL = 'https://image.tmdb.org/t/p/w1280';
 
-export const getMovies = async (category) => {
-    const response = await fetch(`${URL}/${category}?api_key=${API_KEY}&language=en-US`);
+export const getMovies = async (query, pageNumber) => {
+    const response = await fetch(`${URL_MOVIES}${API_KEY}&${query}&page=${pageNumber}`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -15,19 +56,19 @@ export const getMovies = async (category) => {
         return {
             id: movie.id,
             title: movie.title,
-            poster: `${POSTER_BASE_URL}${movie.poster_path}`,
+            poster: movie.poster_path ? `${POSTER_BASE_URL}${movie.poster_path}` : NotFoundPoster,
             backdrop: `${BACKDROP_BASE_URL}${movie.backdrop_path}`,
             overview: movie.overview,
-            releaseDate: movie.release_date,
+            releaseDate: movie.release_date.replace(/-/g, '.'),
             rating: movie.vote_average,
         }
     });
-    
+
     return movies;
 };
 
 export const getMovieDetails = async (movieId) => {
-    const response = await fetch(`${URL}/${movieId}?api_key=${API_KEY}&language=en-US`);
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -37,12 +78,36 @@ export const getMovieDetails = async (movieId) => {
     const movieDetails = {
         id: data.id,
         title: data.title,
-        poster: `${POSTER_BASE_URL}${data.poster_path}`,
+        poster: data.poster_path ? `${POSTER_BASE_URL}${data.poster_path}` : NotFoundPoster,
         backdrop: `${BACKDROP_BASE_URL}${data.backdrop_path}`,
         overview: data.overview,
-        releaseDate: data.release_date,
-        rating: data.vote_average
+        releaseDate: data.release_date ? data.release_date.replace(/-/g, '.') : 'Unknown',
+        rating: data.vote_average,
+        nowPlaying: data.release_date < getDate(true) && data.release_date > getDateThreeMonthsAgo() ? true : false
     }
     
     return movieDetails
+};
+
+export const searchMovies = async (searchKeyword) => {
+    const response = await fetch(`${URL_SEARCH}${searchKeyword}&page=1`);
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error('Something went wrong.');
+    }
+
+    const searchResults = data.results.map(movie => {
+        return {
+            id: movie.id,
+            title: movie.title,
+            poster: movie.poster_path ? `${POSTER_BASE_URL}${movie.poster_path}` : NotFoundPoster,
+            backdrop: `${BACKDROP_BASE_URL}${movie.backdrop_path}`,
+            overview: movie.overview,
+            releaseDate: movie.release_date ? movie.release_date.replace(/-/g, '.') : 'Release Date Unknown',
+            rating: movie.vote_average,
+        }
+    })
+    
+    return searchResults;
 };
