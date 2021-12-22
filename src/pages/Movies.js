@@ -1,45 +1,34 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import MovieListItem from "../components/Movies/MovieListItem";
-import PaginationControls from '../components/Navigation/PaginationControls';
+import Button from '../components/UI/Button';
 import classes from './Movies.module.css';
 
 const Movies = ({ title, movies }) => {
-    let { page } = useParams();
-    const navigate = useNavigate();
-    const [pageNumber, setPageNumber] = useState(
-        isNaN(page) || Number(page) > movies.length-1 ? 0 : Number(page)
-    );
+    const location = useLocation();
+    const [shownMovies, setShownMovies] = useState(10);
 
     useEffect(() => {
-        navigate(`../${pageNumber}`);
-    }, [navigate, pageNumber]);
+        setShownMovies(10);
+    }, [location]);
 
-    const nextPage = () => {
-        if (pageNumber !== movies.length - 1) {
-            setPageNumber(prevPage => prevPage + 1);
-        }
-    };
+    const mergedMovies = [].concat(...movies);
 
-    const previousPage = () => {
-        if (pageNumber !== 0) {
-            setPageNumber(prevPage => prevPage - 1);
+    const loadMoreMovies = () => {
+        if (shownMovies < mergedMovies.length) {
+            setShownMovies(prevCount => prevCount + 10);
+        } else {
+            setShownMovies(10);
         }
     };
 
     return (
-        <div className={`page-wrapper ${classes.movies}`}>
+        <div className={classes.movies}>
             <div className={classes.container}>
                 <h2>{title}</h2>
-                <PaginationControls 
-                    pageNumber={pageNumber} 
-                    lastPage={movies.length-1} 
-                    nextPage={nextPage} 
-                    previousPage={previousPage}
-                />
                 <ul>
-                    {movies[pageNumber].map(movie => (
+                    {mergedMovies.slice(0, shownMovies).map(movie => (
                         <MovieListItem
                             key={movie.id}
                             movieId={movie.id}
@@ -48,15 +37,20 @@ const Movies = ({ title, movies }) => {
                             poster={movie.poster}
                             rating={movie.rating}
                             releaseDate={movie.releaseDate}
+                            nowPlaying={movie.nowPlaying}
                         />
                     ))}
                 </ul>
-                <PaginationControls 
-                    pageNumber={pageNumber} 
-                    lastPage={movies.length-1} 
-                    nextPage={nextPage} 
-                    previousPage={previousPage}
-                />
+                <Button 
+                    onClick={loadMoreMovies}
+                >
+                    {shownMovies < mergedMovies.length &&
+                        'Load More'
+                    }
+                    {shownMovies >= mergedMovies.length &&
+                        'Show Less'
+                    }
+                </Button>
             </div>
         </div>
     );
