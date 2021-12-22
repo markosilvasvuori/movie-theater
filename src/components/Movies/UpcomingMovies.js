@@ -8,7 +8,7 @@ const UpcomingMovies = ({ movies }) => {
         <div className={classes['upcoming-movies']}>
             <header className={classes.header}>
                 <h3>Upcoming</h3>
-                <Link to='/upcoming/0'>View More</Link>
+                <Link to='/upcoming'>View More</Link>
             </header>
             <div className={classes.list}>
                 {movies.slice(0, 6).map(movie => (
