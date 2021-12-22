@@ -29,12 +29,15 @@ const Search = () => {
     }, [isLoading, searchKeyword]);
 
     return (
-        <div className={`page-wrapper ${classes.movies}`}>
+        <div className={classes.movies}>
             {isLoading && <LoadingSpinner />}
             {!isLoading &&
                 <div className={classes.container}>
                     <h2>Search Results</h2>
                     <ul>
+                        {searchResults.length === 0 &&
+                            <li>No results for '{searchKeyword}'.</li>
+                        }
                         {searchResults.map(movie => (
                             <MovieListItem
                                 key={movie.id}
