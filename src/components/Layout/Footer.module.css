@@ -2,7 +2,69 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    padding: 20px 30px;
+    height: 325px;
+    padding: 50px 25px;
+    font-size: 0.875rem;
+    text-align: center;
     background-color: #181e21;
+}
+
+.footer .container {
+    width: 100%;
+    max-width: 750px;
+}
+
+.footer .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.footer .bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.column:first-child {
+    margin-bottom: 50px;
+}
+
+.column {
+    width: 90%;
+}
+
+.tmdb-logo {
+    width: 200px;
+    margin-bottom: 15px;
+}
+
+@media screen and (min-width: 768px) {
+    .footer {
+        height: 190px;
+        text-align: left;
+    }
+
+    .footer .top {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
+
+    .footer .bottom {
+        justify-content: flex-start;
+    }
+
+    .column:first-child {
+        margin-bottom: 0;
+    }
+
+    .column {
+        max-width: 300px;
+    }
 }
