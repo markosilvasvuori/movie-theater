@@ -1,15 +1,31 @@
+.movies {
+    width: 100%;
+    max-width: 950px;
+}
+
+.movies .container {
+    width: 100%;
+    margin: 0 25px;
+    padding: 0 25px;
+    margin-bottom: 50px;
+}
+
 .movies h2 {
-    margin-top: 30px;
-    margin-bottom: 60px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .movies ul {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 1265px;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .movies ul li {
-    max-width: 130px;
     margin-bottom: 25px;
+}
+
+.movies ul li:last-child {
+    margin-bottom: 0;
 }
