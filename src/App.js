@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { getMovies, NOW_PLAYING, UPCOMING_MOVIES } from './lib/api';
+import Modal from './components/UI/Modal';
+import LoginFormForModal from './components/User/LoginFormForModal'
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Frontpage from './pages/Frontpage';
@@ -15,14 +17,14 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [nowPlayingMovies, setNowPlayingMovies] = useState(null);
     const [upcomingMovies, setUpcomingMovies] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchMovies = async () => {
             if (!nowPlayingMovies) {
                 setNowPlayingMovies([ 
                     await getMovies(NOW_PLAYING, 1), 
-                    await getMovies(NOW_PLAYING, 2),
-                    await getMovies(NOW_PLAYING, 3) 
+                    await getMovies(NOW_PLAYING, 2)
                 ]);
             }
             if (!upcomingMovies) {
@@ -30,8 +32,7 @@ function App() {
                     await getMovies(UPCOMING_MOVIES, 1),
                     await getMovies(UPCOMING_MOVIES, 2),
                     await getMovies(UPCOMING_MOVIES, 3),
-                    await getMovies(UPCOMING_MOVIES, 4),
-                    await getMovies(UPCOMING_MOVIES, 5)
+                    await getMovies(UPCOMING_MOVIES, 4)
                 ]);
             }
 
@@ -41,9 +42,18 @@ function App() {
         fetchMovies();
     }, [nowPlayingMovies, upcomingMovies]);
 
+    const modalHandler = () => {
+        setShowModal(!showModal);
+    };
+
     return (
         <div className='page-wrapper'>
-            <Header />
+            {showModal &&
+                <Modal title={'Login'} onClick={modalHandler}>
+                    <LoginFormForModal onClick={modalHandler} />
+                </Modal>
+            }
+            <Header onShowModal={modalHandler} />
             {isLoading && <LoadingSpinner />}
             <Routes>
                 <Route 
@@ -56,30 +66,26 @@ function App() {
                             />
                         } 
                 />
-                <Route path='/now-playing'>
-                    <Route 
-                        path=':page'
-                        element={
-                            !isLoading &&
-                            <Movies 
-                                title={'Now Playing'}
-                                movies={nowPlayingMovies}
-                            />
-                        }
-                    />
-                </Route>
-                <Route path='/upcoming'> 
-                    <Route
-                        path=':page'
-                        element={
-                            !isLoading && 
-                            <Movies 
-                                title={'Upcoming'}
-                                movies={upcomingMovies}
-                            />
-                        } 
-                    />
-                </Route>
+                <Route 
+                    path='/now-playing'
+                    element={
+                        !isLoading &&
+                        <Movies 
+                            title={'Now Playing'}
+                            movies={nowPlayingMovies}
+                        />
+                    }
+                />
+                <Route 
+                    path='/upcoming'
+                    element={
+                        !isLoading && 
+                        <Movies 
+                            title={'Upcoming'}
+                            movies={upcomingMovies}
+                        />
+                    } 
+                />
                 <Route path='/movie'>
                     <Route
                         path=':movieId'
