@@ -10,7 +10,7 @@ const Frontpage = ({ nowPlayingMovies, upcomingMovies }) => {
             <Slider 
                 title={'Now Playing'} 
                 movies={nowPlayingMovies} 
-                categoryPage={'now-playing/0'} 
+                categoryPage={'now-playing'} 
             />
             <UpcomingMovies movies={upcomingMovies} />
         </Fragment>
