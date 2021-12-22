@@ -5,10 +5,10 @@ import MobileNavigation from '../Navigation/MobileNavigation';
 import HamburgerIcon from '../UI/HamburgerIcon';
 import Logo from '../UI/Logo';
 import Search from '../Search/Search';
-import Login from '../Login';
+import Login from '../User/Login';
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header = ({ onShowModal }) => {
     const [showMobileNav, setShowMobileNav] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -27,7 +27,7 @@ const Header = () => {
             </div>
             <div className={classes.container}>
                 <Search />
-                <Login />
+                <Login onClick={onShowModal} />
                 <div className={classes['mobile-nav']}>
                     <HamburgerIcon onClick={toggleMobileMenu} onOpen={showMobileNav} />
                     {showMobileNav && 
