@@ -7,12 +7,22 @@ const DesktopNavigation = () => {
         <nav className={classes['desktop-nav']}>
             <ul>
                 <li>
-                    <NavLink to='/now-playing/0'>
+                    <NavLink 
+                        to='/now-playing'
+                        className={({ isActive }) =>
+                            isActive ? classes.active : undefined
+                        }
+                    >
                         Now Playing
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/upcoming/0'>
+                    <NavLink 
+                        to='/upcoming'
+                        className={({ isActive }) =>
+                            isActive ? classes.active : undefined
+                        }
+                    >
                         Upcoming
                     </NavLink>
                 </li>
