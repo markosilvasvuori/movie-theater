@@ -10,3 +10,7 @@
 .desktop-nav a {
     color: #f8f8f8;
 }
+
+.active {
+    border-bottom: 2px solid #f8f8f8;
+}
