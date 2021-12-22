@@ -1,6 +1,6 @@
 const NotFound = () => {
     return (
-        <div>
+        <div style={{ margin: 'auto' }}>
             <h1>404 Page not found.</h1>
         </div>
     );
