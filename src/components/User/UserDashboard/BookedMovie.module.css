@@ -1,0 +1,31 @@
+.booked-movie {
+    width: 100%;
+    padding: 8px;
+}
+
+.booked-movie:nth-child(odd) {
+    background-color: #222;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column button {
+    margin-left: 50px;
+}
+
+@media screen and (min-width: 600px) {
+    .details {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
