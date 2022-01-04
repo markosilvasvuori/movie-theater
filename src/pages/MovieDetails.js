@@ -5,6 +5,7 @@ import { getMovieDetails } from '../lib/api';
 import MovieDetailsHero from '../components/Movies/MovieDetails/MovieDetailsHero';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import MovieDetailsOverview from '../components/Movies/MovieDetails/MovieDetailsOverview';
+import Shows from '../components/Booking/Shows';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -30,6 +31,12 @@ const MovieDetails = () => {
             }
             {!isLoading && 
                 <MovieDetailsOverview movieDetails={movieDetails} />
+            }
+            {!isLoading && 
+                <Shows 
+                    showsAvailable={movieDetails.nowPlaying} 
+                    movieTitle={movieDetails.title} 
+                />
             }
         </Fragment>
     );
