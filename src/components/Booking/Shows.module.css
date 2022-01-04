@@ -1,0 +1,49 @@
+.shows {
+    width: 100%;
+    max-width: 950px;
+    margin-bottom: 50px;
+}
+
+.shows h3 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.form {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.form-column {
+    width: 50%;
+}
+
+.form-column select {
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    color: #f8f8f8;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #f8f8f8;
+    cursor: pointer;
+}
+
+.form-column option {
+    background-color: #000;
+}
+
+.form-column:first-child {
+    padding-right: 10px;
+}
+
+.form-column:last-child {
+    padding-left: 10px;
+}
+
+.no-shows {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
