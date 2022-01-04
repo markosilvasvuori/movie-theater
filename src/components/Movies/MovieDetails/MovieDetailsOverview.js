@@ -1,3 +1,5 @@
+import { HashLink } from 'react-router-hash-link';
+
 import Button from '../../UI/Button';
 import classes from './MovieDetailsOverview.module.css';
 
@@ -7,12 +9,14 @@ const MovieDetailsOverview = ({ movieDetails }) => {
             <div className={classes.overview}>
                 <h3>Overview</h3>
                 <p>{movieDetails.overview}</p>
-                <Button 
-                    className={classes.button}
-                    disabled={movieDetails.nowPlaying ? false : true}
-                >
-                    Get Tickets
-                </Button>
+                <HashLink to='#shows'>
+                    <Button 
+                        className={classes.button}
+                        disabled={movieDetails.nowPlaying ? false : true}
+                    >
+                        Get Tickets
+                    </Button>
+                </HashLink>
             </div>
             <div className={classes['overview-details']}>
                 <h3>Details</h3>
