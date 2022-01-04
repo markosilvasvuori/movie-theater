@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 import MovieItem from "./MovieItem";
 import classes from './UpcomingMovies.module.css';
@@ -8,7 +8,7 @@ const UpcomingMovies = ({ movies }) => {
         <div className={classes['upcoming-movies']}>
             <header className={classes.header}>
                 <h3>Upcoming</h3>
-                <Link to='/upcoming'>View More</Link>
+                <Link to='/upcoming#top'>View More</Link>
             </header>
             <div className={classes.list}>
                 {movies.slice(0, 6).map(movie => (
