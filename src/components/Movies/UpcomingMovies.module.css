@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100%;
     max-width: 1395px;
-    padding: 0 25px;
+    padding: 0 35px;
     margin-bottom: 50px;
 }
 
@@ -11,13 +11,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    column-gap: 24px;
+    column-gap: 25px;
     row-gap: 25px;
 }
 
 .upcoming-movies .list div {
     width: 100%;
-    margin: 0;
+    padding: 0;
+}
+
+.upcoming-movies .list img {
+    height: 100%;
 }
 
 .header {
@@ -33,7 +37,7 @@
 
 @media screen and (min-width: 768px) {
     .upcoming-movies {
-        padding: 0 90px;
+        padding: 0 100px;
     }
 }
 
