@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 import classes from './MovieItem.module.css';
 
 const MovieItem = ({ title, poster, movieId }) => {
     return (
         <div className={classes.movie}>
-            <Link to={`/movie/${movieId}`}>
+            <Link to={`/movie/${movieId}#top`}>
                 <img src={poster} alt={title} />
             </Link>
         </div>
