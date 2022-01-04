@@ -67,7 +67,7 @@ export const getMovies = async (query, pageNumber) => {
     return movies;
 };
 
-export const getMovieDetails = async (movieId) => {
+export const getMovieDetails = async (movieId, isNowPlaying) => {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
     const data = await response.json();
 
@@ -83,7 +83,7 @@ export const getMovieDetails = async (movieId) => {
         overview: data.overview,
         releaseDate: data.release_date ? data.release_date.replace(/-/g, '.') : 'Unknown',
         rating: data.vote_average,
-        nowPlaying: data.release_date < getDate(true) && data.release_date > getDateThreeMonthsAgo() ? true : false
+        nowPlaying: data.release_date >= getDateThreeMonthsAgo() && data.release_date < getDate(true) ? true : false,
     }
     
     return movieDetails
