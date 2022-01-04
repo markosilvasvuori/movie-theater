@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 import MovieItem from '../Movies/MovieItem';
 import classes from './Slider.module.css';
@@ -8,34 +8,32 @@ const Slider = ({ title, movies, categoryPage }) => {
     const slideRef = useRef();
     const [slidesPosition, setSlidesPosition] = useState(0);
 
-    const getRemainingSlides = (nextSlide) => {
+    const getRemainingSlides = (moveForward) => {
         const amountOfSlides = slideRef.current.children.length;
-        let numberOfRemainingSlides = 0;
         const sliderWidth = slideRef.current.getBoundingClientRect();
+        let numberOfRemainingSlides = 0;
 
         for (let i = 0; i < amountOfSlides; i++) {
             const currentSlide = slideRef.current.children[i].getBoundingClientRect();
-            if (nextSlide) {
+            if (moveForward) {
                 if (sliderWidth.right <= currentSlide.right) {
                     numberOfRemainingSlides++;
                 }
             }
 
-            if (!nextSlide) {
+            if (!moveForward) {
                 if (sliderWidth.right >= currentSlide.right) {
                     numberOfRemainingSlides++;
                 }
             }
         }
-        console.log(numberOfRemainingSlides)
+        
         return numberOfRemainingSlides;
     }
 
     const moveSliderForward = () => {
         const remainingSlides = getRemainingSlides(true);
-        const slideWidthWithoutMargin = slideRef.current.children[0].offsetWidth;
-        const slideMarginRight = 25;
-        const slideWidth = slideWidthWithoutMargin + slideMarginRight;
+        const slideWidth = slideRef.current.children[0].offsetWidth;
 
         let lastSlidePosition = remainingSlides * slideWidth;
 
@@ -48,9 +46,7 @@ const Slider = ({ title, movies, categoryPage }) => {
 
     const moveSliderBackward = () => {
         const remainingSlides = getRemainingSlides(false);
-        const slideWidthWithoutMargin = slideRef.current.children[0].offsetWidth;
-        const slideMarginRight = 25;
-        const slideWidth = slideWidthWithoutMargin + slideMarginRight;
+        const slideWidth = slideRef.current.children[0].offsetWidth;
 
         const lastSlidePosition = (slideRef.current.children.length - remainingSlides) * slideWidth;
 
@@ -67,7 +63,7 @@ const Slider = ({ title, movies, categoryPage }) => {
                 <h3 className={classes['slider-title']}>
                     {title}
                 </h3>
-                <Link to={`/${categoryPage}`}>View More</Link>
+                <Link to={`/${categoryPage}#top`}>View More</Link>
             </header>
             <button 
                 className={classes['previous-button']} 
@@ -76,7 +72,7 @@ const Slider = ({ title, movies, categoryPage }) => {
                 &larr;
             </button>
             <div className={classes.slider}>
-                <ul 
+                <div 
                     ref={slideRef} 
                     className={classes.slides} 
                     style={{left: `-${slidesPosition}px`}}
@@ -89,7 +85,7 @@ const Slider = ({ title, movies, categoryPage }) => {
                             poster={movie.poster}
                         />
                     ))}
-                </ul>
+                </div>
             </div>
             <button 
                 className={classes['next-button']} 
