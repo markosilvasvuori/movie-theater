@@ -3,13 +3,15 @@ import { Routes, Route } from 'react-router-dom';
 
 import { getMovies, NOW_PLAYING, UPCOMING_MOVIES } from './lib/api';
 import Modal from './components/UI/Modal';
-import LoginFormForModal from './components/User/LoginFormForModal'
+import LoginForm from './components/User/LoginForm'
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Frontpage from './pages/Frontpage';
 import Movies from './pages/Movies';
 import MovieDetails from './pages/MovieDetails';
 import SearchPage from './pages/SearchPage';
+import UserPage from './pages/UserPage';
+import Booking from './pages/Booking';
 import NotFound from './pages/NotFound';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 
@@ -50,7 +52,7 @@ function App() {
         <div className='page-wrapper'>
             {showModal &&
                 <Modal title={'Login'} onClick={modalHandler}>
-                    <LoginFormForModal onClick={modalHandler} />
+                    <LoginForm inModal={true} closeModal={modalHandler} />
                 </Modal>
             }
             <Header onShowModal={modalHandler} />
@@ -86,24 +88,28 @@ function App() {
                         />
                     } 
                 />
-                <Route path='/movie'>
-                    <Route
-                        path=':movieId'
-                        element={
-                            !isLoading &&
-                            <MovieDetails />
-                        }
-                    />
-                </Route>
-                <Route path='/search'>
-                    <Route 
-                        path=':searchKeyword'
-                        element={
-                            !isLoading &&
-                            <SearchPage />
-                        }
-                    />
-                </Route>
+                <Route 
+                    path='/movie/:movieId'
+                    element={
+                        !isLoading &&
+                        <MovieDetails />
+                    }
+                />
+                <Route 
+                    path='/search/:searchKeyword'
+                    element={
+                        !isLoading &&
+                        <SearchPage />
+                    }
+                />
+                <Route 
+                    path='/booking/:id'
+                    element={<Booking />}
+                />
+                <Route 
+                    path='/userpage' 
+                    element={<UserPage />} 
+                />
                 <Route 
                     path='*' 
                     element={<NotFound />} 
