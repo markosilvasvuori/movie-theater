@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import Button from '../UI/Button';
 import classes from './Slide.module.css';
 
@@ -12,8 +13,14 @@ const Slide = ({ title, rating, releaseDate, backdropImage, movieId}) => {
                     <span>&#9733; {rating}</span>
                 </p>
                 <div className={classes.links}>
-                    <Button className={classes.button}>Get Tickets</Button>
-                    <Link to={`/movie/${movieId}`}>More info</Link>
+                    <HashLink to={`/movie/${movieId}#shows`}>
+                        <Button className={classes.button}>Get Tickets</Button>
+                    </HashLink>
+                    <Link 
+                        className={classes['view-more']} 
+                        to={`/movie/${movieId}`}>
+                            More info
+                    </Link>
                 </div>
             </div>
         </div>
