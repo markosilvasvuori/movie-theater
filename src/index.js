@@ -4,10 +4,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+import { UserProvider } from './store/user-context';
+import { ShowsProvider } from './store/shows-context';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <ShowsProvider>
+          <App />
+        </ShowsProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
