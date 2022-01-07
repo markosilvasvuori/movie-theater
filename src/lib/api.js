@@ -1,40 +1,6 @@
+import { getDate } from './helpers';
+import { getDateThreeMonthsAgo } from './helpers';
 import NotFoundPoster from '../components/Movies/not-found.png';
-
-const getDate = (tomorrow) => {
-    const date = new Date();
-
-    if (tomorrow) {
-        date.setDate(date.getDate() + 1);
-    }
-
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    if (day.toString().length === 1) {
-        day = '0' + day;
-    }
-    if (month.toString().length === 1) {
-        month = '0' + month;
-    }
-    return `${year}-${month}-${day}`;
-};
-
-const getDateThreeMonthsAgo = () => {
-    const threeMonthsAgo = new Date();
-    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    let day = threeMonthsAgo.getDate();
-    let month = threeMonthsAgo.getMonth() + 1;
-    const year = threeMonthsAgo.getFullYear();
-
-    if (day.toString().length === 1) {
-        day = '0' + day;
-    }
-    if (month.toString().length === 1) {
-        month = '0' + month;
-    }
-    return `${year}-${month}-${day}`;
-};
 
 export const NOW_PLAYING = `primary_release_date.gte=${getDateThreeMonthsAgo()}&primary_release_date.lte=${getDate()}`;
 export const UPCOMING_MOVIES = `primary_release_date.gte=${getDate(true)}`;
@@ -67,7 +33,7 @@ export const getMovies = async (query, pageNumber) => {
     return movies;
 };
 
-export const getMovieDetails = async (movieId, isNowPlaying) => {
+export const getMovieDetails = async (movieId) => {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
     const data = await response.json();
 
