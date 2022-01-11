@@ -20,6 +20,7 @@ const UserDashboard = () => {
                     <ul className={classes['booked-movies']}>
                         {userData.bookedTickets.map(ticket => (
                             <BookedMovie 
+                                key={ticket.title}
                                 title={ticket.title}
                                 date={ticket.date}
                                 time={ticket.time}
