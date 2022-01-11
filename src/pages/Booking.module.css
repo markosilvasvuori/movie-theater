@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 0 25px;
+}
+
+.header {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.header h2 {
+    margin-bottom: 10px;
+}
+
+.header p {
+    margin-bottom: 4px;
+}
+
+.button {
+    align-self: flex-end;
+    margin-top: 25px;
+}
+
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 0;
+    }
+}
