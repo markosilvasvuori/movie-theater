@@ -1,21 +1,26 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
-import { ShowsContext } from '../../store/shows-context';
+import { UserContext } from '../../store/user-context';
 import Button from "../UI/Button";
 import classes from './ShowItem.module.css';
 
-const ShowItem = ({ id, title, showTime, auditoriumNumber, freeSeats, tickets }) => {
-    const { setUserBookingData } = useContext(ShowsContext);
+const ShowItem = ({ id, showDay, date, title, showTime, hallNumber, hallSize, seats, tickets }) => {
+    const { setUserBookingData } = useContext(UserContext);
+    const totalSeats = hallSize.rows * hallSize.seatsInRow;
+    const preparedDate = date.substring(date.indexOf(' ')+1);
 
     const collectBookingData = () => {
         setUserBookingData(prevData => {
             return {
                 ...prevData,
+                showDay: showDay,
+                showDayId: id,
                 title: title,
-                date: '',
+                date: preparedDate,
                 time: showTime,
-                auditorium: auditoriumNumber,
+                hall: hallNumber,
+                hallSize: hallSize,
                 tickets: tickets
             }
         });
@@ -25,11 +30,14 @@ const ShowItem = ({ id, title, showTime, auditoriumNumber, freeSeats, tickets })
         <li className={classes['show-item']}>
             <div>
                 <p className={classes.time}>{showTime}</p>
-                <p>Auditorium {auditoriumNumber}</p>
+                <p>Hall {hallNumber}</p>
             </div>
             <div>
-                <p>Free seats: {freeSeats}/300</p>
-                <Link to={`/booking/${id}`} onClick={collectBookingData}>
+                <p>Free seats: {seats}/{totalSeats}</p>
+                <Link 
+                    to={`/booking/${id}#top`} 
+                    onClick={collectBookingData}
+                >
                     <Button>Select Show</Button>
                 </Link>
             </div>
