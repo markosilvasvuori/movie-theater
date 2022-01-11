@@ -63,13 +63,15 @@ const Slider = ({ title, movies, categoryPage }) => {
                 <h3 className={classes['slider-title']}>
                     {title}
                 </h3>
-                <Link to={`/${categoryPage}#top`}>View More</Link>
+                <Link to={`/${categoryPage}#top`}>
+                    View More
+                </Link>
             </header>
             <button 
                 className={classes['previous-button']} 
                 onClick={moveSliderBackward}
             >
-                &larr;
+                &lsaquo;
             </button>
             <div className={classes.slider}>
                 <div 
@@ -91,7 +93,7 @@ const Slider = ({ title, movies, categoryPage }) => {
                 className={classes['next-button']} 
                 onClick={moveSliderForward}
             >
-                &rarr;
+                &rsaquo;
             </button>
         </div>
     );
