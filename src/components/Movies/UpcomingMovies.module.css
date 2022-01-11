@@ -31,8 +31,13 @@
     margin-bottom: 30px;
 }
 
+
 .header a {
     color: #f8f8f8;
+}
+
+.header a:hover {
+    border-bottom: 1px solid #6d42c7;
 }
 
 @media screen and (min-width: 768px) {
