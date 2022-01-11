@@ -17,10 +17,14 @@ const MovieListIem = ({ title, overview, poster, rating, releaseDate, movieId })
             </div>
             <div className={classes.details}>
                 <h3>{title}</h3>
-                <p className={classes.overview}>{overview}</p>
+                <p className={classes.overview}>
+                    {overview}
+                </p>
                 <p>&#9733; {rating} | {releaseDate}</p>
                 <Link to={`/movie/${movieId}`}>
-                    <Button className={classes.button}>More Info</Button>
+                    <Button className={classes.button}>
+                        More Info
+                    </Button>
                 </Link>
             </div>
         </li>
