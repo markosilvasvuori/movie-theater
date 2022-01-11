@@ -5,11 +5,20 @@
     font-weight: bold;
     color: #f8f8f8;
     background-color: #6d42c7;
+    transition: background-color .2s ease-in-out;
     cursor: pointer;
+}
+
+.button:hover {
+    background-color: #55349e;
 }
 
 .disabled {
     color: #dbdbdb;
     background-color: #777;
     cursor: not-allowed;
+  }
+
+  .disabled:hover {
+      background-color: #777;
   }
