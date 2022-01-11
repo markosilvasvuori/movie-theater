@@ -4,7 +4,7 @@ import { UserContext } from '../../store/user-context';
 import Button from '../UI/Button';
 import classes from './LoginForm.module.css';
 
-const LoginFormForModal = ({ inModal, closeModal}) => {
+const LoginForm = ({ inModal, closeModal}) => {
     const {setIsLoggedIn, setUserData} = useContext(UserContext);
     const [enteredUsername, setEnteredUsername] = useState('');
 
@@ -48,13 +48,11 @@ const LoginFormForModal = ({ inModal, closeModal}) => {
                 />
                 <Button className={classes['login-button']}>Login</Button>
             </form>
-            <p 
-                className={classes.register}
-            >
+            <p className={classes.register}>
                 Not a member? <span className={classes.register}>Register now</span>
             </p>
         </div>
     );
 }
 
-export default LoginFormForModal;
+export default LoginForm;
