@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-
 import classes from './MobileNavigation.module.css';
 
 const MobileNavigation = (props) => {
@@ -12,12 +11,20 @@ const MobileNavigation = (props) => {
             <nav>
                 <ul>
                     <li onClick={closeMobileNavigation}>
-                        <NavLink to='/now-playing'>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? classes.active : undefined
+                            }
+                            to='/now-playing'>
                             Now Playing
                         </NavLink>
                     </li>
                     <li onClick={closeMobileNavigation}>
-                        <NavLink to='/upcoming'>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? classes.active : undefined
+                            }
+                            to='/upcoming'>
                             Upcoming
                         </NavLink>
                     </li>
