@@ -16,10 +16,12 @@ const Header = ({ onShowModal }) => {
     const [showMobileNav, setShowMobileNav] = useState(false);
 
     const toggleMobileMenu = () => {
+        document.body.classList.toggle('no-scroll');
         setShowMobileNav(!showMobileNav);
     }
 
     const closeMobileMenu = () => {
+        document.body.classList.remove('no-scroll');
         setShowMobileNav(false);
     };
 
@@ -35,12 +37,18 @@ const Header = ({ onShowModal }) => {
                     <Login onClick={onShowModal} />
                 }
                 {isLoggedIn &&
-                    <Link className={classes['user-icon']} to='/userpage'>
+                    <Link 
+                        className={classes['user-icon']} 
+                        to='/userpage'
+                    >
                         <img src={userIcon} alt='user' />
                     </Link>
                 }
                 <div className={classes['mobile-nav']}>
-                    <HamburgerIcon onClick={toggleMobileMenu} onOpen={showMobileNav} />
+                    <HamburgerIcon 
+                        onClick={toggleMobileMenu}
+                        onOpen={showMobileNav} 
+                    />
                     {showMobileNav && 
                         <MobileNavigation onClick={closeMobileMenu} />
                     }
