@@ -25,8 +25,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    max-width: 960px;
+    justify-content: space-between;
+    max-width: 900px;
+    width: 100%;
     text-align: center;
 }
 
@@ -59,6 +60,7 @@
     .details {
         flex-direction: row;
         text-align: left;
+        padding: 0 25px;
     }
 
     .info {
@@ -70,5 +72,11 @@
     .poster {
         order: 2;
         max-width: 250px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .details {
+        padding: 0;
     }
 }
