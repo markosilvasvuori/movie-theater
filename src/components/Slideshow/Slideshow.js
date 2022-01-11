@@ -41,7 +41,7 @@ const Slideshow = ({ movies }) => {
         if (auto) {
             const intervalId = setInterval(() => {
                 nextSlideHandler();
-            }, 5000);
+            }, 3000);
 
             return () => clearInterval(intervalId);
         }
@@ -73,12 +73,12 @@ const Slideshow = ({ movies }) => {
                 <button
                     onClick={previousSlideHandler}
                 >
-                    &larr;
+                    &lsaquo;
                 </button>
                 <button
                     onClick={nextSlideHandler}
                 >
-                    &rarr;
+                    &rsaquo;
                 </button>
             </div>
         </div>
