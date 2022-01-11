@@ -8,9 +8,18 @@
 }
 
 .desktop-nav a {
+    font-size: 0.875rem;
     color: #f8f8f8;
+    padding-bottom: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: color .2s ease-in-out;
 }
 
-.active {
-    border-bottom: 2px solid #f8f8f8;
+.desktop-nav a:hover {
+    color: #6d42c7;
+}
+
+.desktop-nav a.active {
+    border-bottom: 2px solid #6d42c7;
 }
