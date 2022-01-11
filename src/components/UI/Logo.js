@@ -6,7 +6,7 @@ const Logo = (props) => {
     return (
         <Link to='/'>
             <div className={classes.logo} onClick={props.onClick}>
-                Movie Theater
+                M<span className={classes.detail}>o</span>vie Theater
             </div>
         </Link>
     );
