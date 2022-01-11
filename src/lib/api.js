@@ -1,6 +1,5 @@
-import { getDate } from './helpers';
-import { getDateThreeMonthsAgo } from './helpers';
-import NotFoundPoster from '../components/Movies/not-found.png';
+import { getDate, getDateThreeMonthsAgo, prepareDate } from './helpers';
+import NotFoundPoster from '../img/not-found.png';
 
 export const NOW_PLAYING = `primary_release_date.gte=${getDateThreeMonthsAgo()}&primary_release_date.lte=${getDate()}`;
 export const UPCOMING_MOVIES = `primary_release_date.gte=${getDate(true)}`;
@@ -25,7 +24,7 @@ export const getMovies = async (query, pageNumber) => {
             poster: movie.poster_path ? `${POSTER_BASE_URL}${movie.poster_path}` : NotFoundPoster,
             backdrop: `${BACKDROP_BASE_URL}${movie.backdrop_path}`,
             overview: movie.overview,
-            releaseDate: movie.release_date.replace(/-/g, '.'),
+            releaseDate: prepareDate(movie.release_date),
             rating: movie.vote_average,
         }
     });
@@ -47,7 +46,7 @@ export const getMovieDetails = async (movieId) => {
         poster: data.poster_path ? `${POSTER_BASE_URL}${data.poster_path}` : NotFoundPoster,
         backdrop: `${BACKDROP_BASE_URL}${data.backdrop_path}`,
         overview: data.overview,
-        releaseDate: data.release_date ? data.release_date.replace(/-/g, '.') : 'Unknown',
+        releaseDate: data.release_date ? prepareDate(data.release_date) : 'Unknown',
         rating: data.vote_average,
         nowPlaying: data.release_date >= getDateThreeMonthsAgo() && data.release_date < getDate(true) ? true : false,
     }
@@ -70,7 +69,7 @@ export const searchMovies = async (searchKeyword) => {
             poster: movie.poster_path ? `${POSTER_BASE_URL}${movie.poster_path}` : NotFoundPoster,
             backdrop: `${BACKDROP_BASE_URL}${movie.backdrop_path}`,
             overview: movie.overview,
-            releaseDate: movie.release_date ? movie.release_date.replace(/-/g, '.') : 'Release Date Unknown',
+            releaseDate: movie.release_date ? prepareDate(movie.release_date) : 'Release Date Unknown',
             rating: movie.vote_average,
         }
     })
