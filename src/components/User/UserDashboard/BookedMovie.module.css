@@ -1,6 +1,6 @@
 .booked-movie {
     width: 100%;
-    padding: 8px;
+    padding: 12px 8px;
 }
 
 .booked-movie:nth-child(odd) {
