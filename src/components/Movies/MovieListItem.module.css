@@ -21,6 +21,7 @@
 
 .movie-list-item .poster div {
     margin: 0;
+    padding-left: 0;
 }
 
 .movie-list-item .overview {
