@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-
 import classes from './DesktopNavigation.module.css';
 
 const DesktopNavigation = () => {
