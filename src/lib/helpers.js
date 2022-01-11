@@ -33,3 +33,8 @@ export const getDateThreeMonthsAgo = () => {
     }
     return `${year}-${month}-${day}`;
 };
+
+export const prepareDate = (date) => {
+    const dateArr = date.split('-');
+    return dateArr.reverse().join('.');
+};
