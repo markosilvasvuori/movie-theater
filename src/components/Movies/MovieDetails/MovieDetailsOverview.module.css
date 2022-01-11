@@ -1,10 +1,17 @@
 .overview-section {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    padding: 50px 25px;
     color: #222;
     background-color: #f8f8f8;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    padding: 50px 25px;
 }
 
 .overview {
@@ -32,23 +39,23 @@
 }
 
 @media screen and (min-width: 768px) {
-    .overview-section {
+    .container {
         flex-direction: row;
         align-items: flex-start;
-        justify-content: center;
-        padding: 50px 0;
+        justify-content: space-between;
+        padding: 50px 25px;
     }
     
     .overview {
         order: 1;
-        max-width: 40%;
+        max-width: 50%;
         margin-right: 60px;
     }
     
     .overview-details {
         display: block;
         order: 2;
-        max-width: 40%;
+        max-width: 50%;
     }
 
     .overview-details h3 {
@@ -57,5 +64,17 @@
 
     .separator {
         display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 50px 25px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        padding: 50px 0;
     }
 }
