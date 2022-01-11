@@ -18,6 +18,7 @@ const Footer = () => {
                         <a 
                             href='https://www.themoviedb.org/' 
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <img 
                                 className={classes['tmdb-logo']}
