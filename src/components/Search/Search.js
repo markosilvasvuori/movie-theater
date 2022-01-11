@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import searchIcon from './search.svg';
+import searchIcon from '../../img/search.svg';
 import classes from './Search.module.css';
 
 const Search = () => {
