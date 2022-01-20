@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../store/user-context';
+import { AuthContext } from '../../store/auth-context';
 import DesktopNavigation from '../Navigation/DesktopNavigation';
 import MobileNavigation from '../Navigation/MobileNavigation';
 import HamburgerIcon from '../UI/HamburgerIcon';
@@ -12,7 +12,7 @@ import userIcon from '../../img/user.svg';
 import classes from './Header.module.css';
 
 const Header = ({ onShowModal }) => {
-    const {isLoggedIn} = useContext(UserContext);
+    const { authCtxValues } = useContext(AuthContext);
     const [showMobileNav, setShowMobileNav] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -33,10 +33,10 @@ const Header = ({ onShowModal }) => {
             </div>
             <div className={classes.container}>
                 <Search />
-                {!isLoggedIn &&
+                {!authCtxValues.isLoggedIn &&
                     <Login onClick={onShowModal} />
                 }
-                {isLoggedIn &&
+                {authCtxValues.isLoggedIn &&
                     <Link 
                         className={classes['user-icon']} 
                         to='/userpage'
