@@ -4,33 +4,37 @@ import { ShowsContext } from '../../store/shows-context';
 import Seat from './Seat';
 import classes from './Hall.module.css';
 
-const Hall = ({ hallSize, showDay, showDayId, tickets }) => {
-    const { DEMO_DATA } = useContext(ShowsContext);
+const Hall = ({ hallSize, movieTitle, showDay, showtimeId, tickets, onSelectSeats }) => {
+    const { showsData } = useContext(ShowsContext);
     const numberOfRows = hallSize.rows;
     const seatsInRow = hallSize.seatsInRow;
 
     const checkForReserverdSeats = (seatId) => {
-        const showDayToCheck = DEMO_DATA[showDay];
-        let showtimeToCheck = null;
-        
-        for (let i = 0; i < showDayToCheck.length; i++) {
-            if (showDayToCheck[i].id === showDayId) {
-                showtimeToCheck = showDayToCheck[i];
-            }
-        }
+        const showDayToCheck = showsData[showDay];
+        const showTimeToCheck = showDayToCheck.filter(showDay => showDay.showtimeId === showtimeId);
 
-        for (let i = 0; i < showtimeToCheck.reservedSeats.length; i++) {
-            if (showtimeToCheck.reservedSeats[i].seatId === seatId ) {
-                return true;
-            }
+        const seatToCheck = showTimeToCheck[0].reservedSeats.filter(seat => 
+            seat.seatId === seatId &&
+            (seat.movieTitle.includes(movieTitle) ||
+            seat.movieTitle.includes('demo_seat'))
+        );
+
+        if(seatToCheck.length) {
+            return true;
         }
     }
 
     const selectSeatHandler = (seat) => {
+        const selectedSeats = [];
         const parent = seat.parentNode;
         const allRows = parent.parentNode.children;
+        let seatReserved = checkForReserverdSeats(seat.id);
         let selectedSeat = seat;
         let counter = 0;
+
+        if (seatReserved) {
+            return;
+        }
 
         // Reset all selections
         for (let i = 0; i < allRows.length; i++) {
@@ -43,14 +47,57 @@ const Hall = ({ hallSize, showDay, showDayId, tickets }) => {
         }
 
         while (tickets > counter) {
-            selectedSeat.classList.add(classes['selected-seat']);
-            selectedSeat = selectedSeat.nextSibling;
-            counter++;
+            if (!seatReserved) {
+                selectedSeats.push(selectedSeat.id);
+                selectedSeat.classList.add(classes['selected-seat']);
+
+                // Next seat
+                if (selectedSeat.nextSibling.id) {
+                    selectedSeat = selectedSeat.nextSibling;
+                    seatReserved = checkForReserverdSeats(selectedSeat.id);
+                    counter++;
+                    continue;
+                }
+                
+                // Switch to next row after current row's last seat
+                if (!selectedSeat.nextSibling.id && selectedSeat.parentNode.nextSibling) {
+                    selectedSeat = selectedSeat.parentNode.nextSibling.firstChild.nextSibling;
+                    seatReserved = checkForReserverdSeats(selectedSeat.id);
+                    counter++;
+                    continue;
+                }
+
+                // Switch to first row after last row's last seat
+                if (!selectedSeat.nextSibling.id && !selectedSeat.parentNode.nextSibling) {
+                    selectedSeat = selectedSeat.parentNode.parentNode.firstChild.firstChild.nextSibling;
+                    seatReserved = checkForReserverdSeats(selectedSeat.id);
+                    counter++;
+                    continue;
+                }
+            }
+
+            if (seatReserved && !selectedSeat.nextSibling.id && selectedSeat.parentNode.nextSibling) {
+                selectedSeat = selectedSeat.parentNode.nextSibling.firstChild.nextSibling;
+                seatReserved = checkForReserverdSeats(selectedSeat.id);
+            }
+
+            if (seatReserved && !selectedSeat.nextSibling.id && !selectedSeat.parentNode.nextSibling) {
+                selectedSeat = selectedSeat.parentNode.parentNode.firstChild.firstChild.nextSibling;
+                seatReserved = checkForReserverdSeats(selectedSeat.id);
+            }
+            
+            if (seatReserved) {
+                selectedSeat = selectedSeat.nextSibling;
+                seatReserved = checkForReserverdSeats(selectedSeat.id);
+            }
         }
+
+        onSelectSeats(selectedSeats);
     };
 
     const createSeats = (row) => {
         const seats = [];
+
         for (let i = 1; i <= seatsInRow; i++) {
             const rowNumber = row.toString().length === 1 ? `0${row}` : row;
             const seatNumber = i.toString().length === 1 ? `0${i}` : i;
@@ -73,7 +120,7 @@ const Hall = ({ hallSize, showDay, showDayId, tickets }) => {
     const createRows = () => {
         const rows = [];
         for (let i = 1; i <= numberOfRows; i++) {
-            rows.push(
+            rows.unshift(
                 <ul key={i} className={classes.row}>
                     <li className={classes['row-number']}>{i}</li>
                     {createSeats(i)}
