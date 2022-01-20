@@ -6,15 +6,18 @@ import App from './App';
 
 import { UserProvider } from './store/user-context';
 import { ShowsProvider } from './store/shows-context';
+import { AuthProvider } from './store/auth-context';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <ShowsProvider>
-          <App />
-        </ShowsProvider>
-      </UserProvider>
+      <AuthProvider>
+        <UserProvider>
+          <ShowsProvider>
+            <App />
+          </ShowsProvider>
+        </UserProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
