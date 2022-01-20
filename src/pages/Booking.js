@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 
 import { ShowsContext } from '../store/shows-context';
@@ -6,7 +6,6 @@ import { UserContext } from '../store/user-context';
 import Hall from '../components/Booking/Hall';
 import Button from '../components/UI/Button';
 import classes from './Booking.module.css';
-import { useEffect } from 'react/cjs/react.development';
 
 const Booking = () => {
     const { userBookingData, setUserBookingData, setUserData, userData } = useContext(UserContext);
