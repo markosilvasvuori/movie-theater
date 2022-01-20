@@ -4,9 +4,9 @@ This is a movie theater demo website I built for my portfolio to showcase my Rea
 
 ## Built With:
 
-<a href="https://www.themoviedb.org/"><b>TMDB API</b></a> To fetch movie info (titles, descriptions, release dates, ratings, images...).
-<a href="https://firebase.google.com/docs/reference/rest/auth"><b>Firebase Auth Rest API</b></a> To authenticate anonymous login.
-<a href="https://create-react-app.dev/"><b>Create React App</b></a> Used to bootstrap the project.
+<a href="https://www.themoviedb.org/"><b>TMDB API</b></a> To fetch movie info (titles, descriptions, release dates, ratings, images...). </br>
+<a href="https://firebase.google.com/docs/reference/rest/auth"><b>Firebase Auth Rest API</b></a> To authenticate anonymous login. </br>
+<a href="https://create-react-app.dev/"><b>Create React App</b></a> Used to bootstrap the project. </br>
 
 ## Features
 
