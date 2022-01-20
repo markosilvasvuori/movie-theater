@@ -17,7 +17,7 @@ const MovieDetailsHero = ({ movieDetails }) => {
                         <span>{movieDetails.releaseDate} | </span>
                         <span>&#9733; {movieDetails.rating}</span>
                     </p>
-                    <HashLink to='#shows'>
+                    <HashLink smooth to='#shows'>
                         <Button 
                             className={classes.button}
                             disabled={movieDetails.nowPlaying ? false : true}
