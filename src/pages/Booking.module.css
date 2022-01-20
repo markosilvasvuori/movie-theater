@@ -25,6 +25,32 @@
     margin-top: 25px;
 }
 
+.message {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 12px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #9e2616;
+}
+
+.confirmed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.confirmed p {
+    margin-bottom: 25px;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.confirmed button {
+    width: 200px;
+}
+
 @media screen and (min-width: 1024px) {
     .container {
         padding: 0;
