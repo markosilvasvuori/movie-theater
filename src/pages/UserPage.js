@@ -1,23 +1,22 @@
 import { Fragment, useContext } from 'react';
 
-import { UserContext } from "../store/user-context";
+import { AuthContext } from "../store/auth-context";
 import LoginForm from '../components/User/LoginForm';
 import UserDashboard from '../components/User/UserDashboard/UserDashboard';
 import classes from './UserPage.module.css';
 
-const UserPage = () => {
-    const {isLoggedIn} = useContext(UserContext);
+const UserPage = (props) => {
+    const { authCtxValues } = useContext(AuthContext);
 
     return (
         <Fragment>
-            {!isLoggedIn &&
+            {!authCtxValues.isLoggedIn &&
                 <div className={classes.container}>
-                    <h2>Login</h2>
                     <LoginForm />
                 </div>
             }
-            {isLoggedIn &&
-                <UserDashboard />
+            {authCtxValues.isLoggedIn &&
+                <UserDashboard closeModal={props.closeModal} />
             }
         </Fragment>
     );
