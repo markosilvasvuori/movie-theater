@@ -1,54 +1,47 @@
 import { createContext, useState } from 'react';
-import { getDate, prepareDate } from '../lib/helpers';
 
 export const UserContext = createContext();
 
+const retrieveUserData = () => {
+    const storedUsername = localStorage.getItem('username');
+    const storedTickets = JSON.parse(localStorage.getItem('bookedTickets'));
+
+    return {
+        username: storedUsername,
+        bookedTickets: storedTickets
+    }
+};
+
 export const UserProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const storedData = retrieveUserData();
+    let username;
+    let bookedTickets;
+
+    if (storedData) {
+        username = storedData.username;
+        bookedTickets = storedData.bookedTickets;
+    }
+
     const [userData, setUserData] = useState({
-        username: '',
-        bookedTickets: [
-            {
-                title: 'Spider-Man: No Way Home',
-                date: prepareDate(getDate()),
-                time: '17:00',
-                amount: '1'
-            },
-            {
-                title: 'Ghostbusters: Afterlife',
-                date: prepareDate(getDate(true)),
-                time: '14:00',
-                amount: '2'
-            },
-            {
-                title: 'The Matrix Resurrections',
-                date: prepareDate(getDate(true)),
-                time: '21:15',
-                amount: '2'
-            }
-        ]
+        username: username ? username : '',
+        bookedTickets: bookedTickets ? bookedTickets : []
     });
     const [userBookingData, setUserBookingData] = useState({
         title: '',
         date: '',
         time: '',
-        auditorium: '',
+        hall: '',
         tickets: '',
         row: '',
-        seats: ''
+        seats: '',
+        seatIds: [],
+        showtimeId: '',
     });
 
-    const logOutHandler = () => {
-        setIsLoggedIn(false);
-    };
-
     return (
-        <UserContext.Provider value={{
-                isLoggedIn, 
-                setIsLoggedIn, 
+        <UserContext.Provider value={{  
                 userData, 
-                setUserData, 
-                logOutHandler,
+                setUserData,
                 userBookingData,
                 setUserBookingData
             }}
