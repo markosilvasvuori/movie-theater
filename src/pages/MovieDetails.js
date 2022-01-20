@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 
 import { getMovieDetails } from '../lib/api';
-import { UserContext } from '../store/user-context'; 
+import { AuthContext } from '../store/auth-context'; 
 import MovieDetailsHero from '../components/Movies/MovieDetails/MovieDetailsHero';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import MovieDetailsOverview from '../components/Movies/MovieDetails/MovieDetailsOverview';
@@ -12,7 +12,7 @@ import classes from './MovieDetails.module.css';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
-    const { isLoggedIn } = useContext(UserContext);
+    const { authCtxValues } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(true);
     const [movieDetails, setMovieDetails] = useState(null);
 
@@ -36,13 +36,13 @@ const MovieDetails = () => {
             {!isLoading && 
                 <MovieDetailsOverview movieDetails={movieDetails} />
             }
-            {!isLoading && !isLoggedIn &&
+            {!isLoading && !authCtxValues.isLoggedIn &&
                 <div id='shows' className={classes['login-container']}>
                     <h3>Login to book tickets.</h3>
                     <LoginForm />
                 </div>
             }
-            {!isLoading && isLoggedIn &&
+            {!isLoading && authCtxValues.isLoggedIn &&
                 <Shows 
                     showsAvailable={movieDetails.nowPlaying} 
                     movieTitle={movieDetails.title} 
