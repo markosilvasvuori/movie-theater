@@ -5,11 +5,12 @@ import ShowItem from './ShowItem';
 import classes from './Shows.module.css';
 
 const Shows = ({ showsAvailable, movieTitle }) => {
-    const { DEMO_DATA } = useContext(ShowsContext);
+    const { showsData } = useContext(ShowsContext);
     const dateRef = useRef();
     const [showDay, setShowday] = useState('showDay1');
     const [showDate, setShowDate] = useState('');
     const [tickets, setTickets] = useState(1);
+    const [today, setToday] = useState('');
     let dateCounter = 0;
 
     const getDate = () => {
@@ -38,9 +39,10 @@ const Shows = ({ showsAvailable, movieTitle }) => {
     useEffect(() => {
         if (showsAvailable) {
             const options = dateRef.current.options;
+            setToday(options[0].text);
             setShowDate(options[options.selectedIndex].text);
         }
-    }, [dateRef, showsAvailable]);
+    }, [dateRef, showsAvailable, today]);
 
     return (
         <Fragment>
@@ -80,18 +82,20 @@ const Shows = ({ showsAvailable, movieTitle }) => {
                         </div>
                     </form>
                     <ul>
-                        {DEMO_DATA[showDay].map(show => (
+                        {showsData[showDay].map(show => (
                             <ShowItem 
-                                key={show.id}
-                                id={show.id}
+                                key={show.showtimeId}
+                                showtimeId={show.showtimeId}
                                 showDay={showDay}
                                 date={showDate}
                                 title={movieTitle}
-                                showTime={show.time}
+                                showtime={show.time}
                                 hallNumber={show.hall}
                                 hallSize={show.hallSize}
+                                reservedSeats={show.reservedSeats}
                                 seats={show.seats}
                                 tickets={tickets}
+                                today={today}
                             />
                         ))}
                     </ul>
