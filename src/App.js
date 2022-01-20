@@ -1,6 +1,8 @@
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, useContext, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import { UserContext } from './store/user-context';
+import { AuthContext } from './store/auth-context';
 import { getMovies, NOW_PLAYING, UPCOMING_MOVIES } from './lib/api';
 import Modal from './components/UI/Modal';
 import LoginForm from './components/User/LoginForm'
@@ -14,9 +16,12 @@ const MovieDetails = lazy(() => import('./pages/MovieDetails'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const UserPage = lazy(() => import('./pages/UserPage'));
 const Booking = lazy(() => import('./pages/Booking'));
+const BookingConfirmed = lazy(() => import('./pages/BookingConfirmed'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
+    const { userBookingData } = useContext(UserContext);
+    const { authCtxValues } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(true);
     const [nowPlayingMovies, setNowPlayingMovies] = useState(null);
     const [upcomingMovies, setUpcomingMovies] = useState(null);
@@ -110,8 +115,18 @@ function App() {
                         }
                     />
                     <Route 
-                        path='/booking/:id'
-                        element={<Booking />}
+                        path='/booking'
+                        element={
+                            userBookingData.title &&
+                                <Booking />
+                            }
+                    />
+                    <Route 
+                        path='/confirmed'
+                        element={
+                            authCtxValues.isLoggedIn &&
+                            <BookingConfirmed />
+                        }
                     />
                     <Route 
                         path='/userpage' 
