@@ -10,7 +10,7 @@ const MovieDetailsOverview = ({ movieDetails }) => {
                 <div className={classes.overview}>
                     <h3>Overview</h3>
                     <p>{movieDetails.overview}</p>
-                    <HashLink to='#shows'>
+                    <HashLink smooth to='#shows'>
                         <Button 
                             className={classes.button}
                             disabled={movieDetails.nowPlaying ? false : true}
