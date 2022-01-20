@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 
 import classes from './Modal.module.css';
 
@@ -12,7 +13,7 @@ const Backdrop = (props) => {
 };
 
 const Modal = (props) => {
-    return (
+    return ReactDOM.createPortal(
         <Fragment>
             <Backdrop onClick={props.onClick} />
             <div className={classes.modal}>
@@ -27,7 +28,8 @@ const Modal = (props) => {
                 </header>
                 {props.children}
             </div>
-        </Fragment>
+        </Fragment>,
+        document.querySelector('#root-modal')
     );
 };
 
