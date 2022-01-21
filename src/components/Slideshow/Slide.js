@@ -8,6 +8,7 @@ const Slide = ({ title, rating, releaseDate, backdropImage, movieId}) => {
             className={classes.slide} 
             style={{ backgroundImage: `url(${backdropImage})` }}
         >
+            <div className={classes.overlay}></div>
             <div className={classes.details}>
                 <h2>{title}</h2>
                 <p className={classes.rating}>
